@@ -28,7 +28,8 @@ class HomeController extends Controller
         if (!session()->has('username')) {
             return back();
         }
-        return view('user.about');
+        $user = \App\Models\User::find(session('user_id'));
+        return view('user.about', compact('user'));
     }
 
     public function guide()
@@ -104,7 +105,7 @@ class HomeController extends Controller
             return response()->json([
                 "user_id" => $request->user_id,
                 "message" => "Thank you for your attendance!",
-                "status"  => false
+                "status" => false
             ]);
         } else {
             $present = substr($attendance_status->present_at, 0, 10);
@@ -112,8 +113,8 @@ class HomeController extends Controller
 
             if ($present == $today) {
                 return response([
-                    'message'  => 'Anda sudah absen hari ini!',
-                    'status'   => true
+                    'message' => 'Anda sudah absen hari ini!',
+                    'status' => true
                 ]);
             }
         }
