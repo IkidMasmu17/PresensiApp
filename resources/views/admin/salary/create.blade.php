@@ -2,67 +2,96 @@
 
 @section('content')
 
-<!-- Page Heading -->
-<a href="{{ url('salary') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
-<h1 class="h3 my-4 text-gray-800">Add user salary</h1>
-
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-body">
-        <form action="{{ url('salary') }}" method="POST">
-            @csrf
-            <div class="form-group row">
-                <div class="col-md-6 mt-2">
-                    <label for="">For user</label>
-                    <select name="user_id" id="" class="form-control">
-                        @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-md-6 mt-2">
-                    <label for="">Month</label>
-                    <select name="month" class="form-control">
-                        <option value="January">January</option>
-                        <option value="February">February</option>
-                        <option value="March">March</option>
-                        <option value="April">April</option>
-                        <option value="may">may</option>
-                        <option value="June">June</option>
-                        <option value="July">July</option>
-                        <option value="August">August</option>
-                        <option value="September">September</option>
-                        <option value="October">October</option>
-                        <option value="November">November</option>
-                        <option value="December">December</option>
-                    </select>
-                </div>
-                <div class="col-md-6 mt-2">
-                    <label for="">Year</label>
-                    <select class="form-control" name="year">
-                        @for($year = (int)date('Y'); 1900 <= $year; $year--) <option value="<?= $year; ?>"><?= $year; ?></option>
-                            @endfor
-                    </select>
-                </div>
-                <div class="col-md-6 mt-2">
-                    <label for="inlineFormInputGroupUsername">Amount</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">Rp</div>
-                        </div>
-                        <input type="text" name="amount" class="form-control">
-                    </div>
-                    @error('amount')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="col-md-6 mt-3">
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </div>
-        </form>
+    <!-- Header -->
+    <div class="mb-8 flex items-center justify-between">
+        <div>
+            <a href="{{ url('salary') }}"
+                class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition mb-2">
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                    </path>
+                </svg>
+                Back to Salary
+            </a>
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Add User Salary</h1>
+            <p class="text-slate-500 mt-1">Daftarkan rincian gaji baru untuk karyawan.</p>
+        </div>
     </div>
-</div>
+
+    <!-- Form Card -->
+    <div class="max-w-3xl bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="p-8">
+            <form action="{{ url('salary') }}" method="POST" class="space-y-8">
+                @csrf
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- User Selection -->
+                    <div class="space-y-1">
+                        <label class="text-sm font-semibold text-gray-700">For Employee</label>
+                        <select name="user_id"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white cursor-pointer">
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>
+                                    {{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Month Selection -->
+                    <div class="space-y-1">
+                        <label class="text-sm font-semibold text-gray-700">Payment Month</label>
+                        <select name="month"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white cursor-pointer">
+                            @foreach(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as $month)
+                                <option value="{{ $month }}" {{ old('month', date('F')) == $month ? 'selected' : '' }}>
+                                    {{ $month }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Year Selection -->
+                    <div class="space-y-1">
+                        <label class="text-sm font-semibold text-gray-700">Payment Year</label>
+                        <select name="year"
+                            class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition bg-white cursor-pointer">
+                            @for($year = (int) date('Y'); 1900 <= $year; $year--)
+                                <option value="{{ $year }}" {{ old('year', date('Y')) == $year ? 'selected' : '' }}>{{ $year }}
+                                </option>
+                            @endfor
+                        </select>
+                    </div>
+
+                    <!-- Amount -->
+                    <div class="space-y-1">
+                        <label class="text-sm font-semibold text-gray-700">Salary Amount (IDR)</label>
+                        <div class="relative group">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none group-focus-within:text-indigo-600 transition">
+                                <span class="text-gray-500 font-bold">Rp</span>
+                            </div>
+                            <input type="number" name="amount" value="{{ old('amount') }}" placeholder="e.g. 5000000"
+                                class="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition font-bold text-gray-900">
+                        </div>
+                        @error('amount')
+                            <p class="text-xs text-red-500 mt-1 font-medium">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="pt-8 flex items-center justify-end space-x-3 border-t border-gray-100">
+                    <button type="reset"
+                        class="px-6 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
+                        Reset
+                    </button>
+                    <button type="submit"
+                        class="px-10 py-2.5 bg-indigo-600 rounded-xl text-sm font-bold text-white hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500/20 transition shadow-lg shadow-indigo-100">
+                        Save Salary Record
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
 
 @endsection

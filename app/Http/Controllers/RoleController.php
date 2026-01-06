@@ -40,11 +40,11 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'role_name' => 'required',
+            'name' => 'required',
         ]);
 
         Role::create([
-            'role_name' => $request->role_name,
+            'name' => $request->name,
             'created_at' => date('Y-m-d H:i:s'),
         ]);
 
@@ -84,11 +84,11 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'role_name' => 'required',
+            'name' => 'required',
         ]);
 
         Role::where('id', $id)->update([
-            'role_name' => $request->role_name,
+            'name' => $request->name,
         ]);
         return redirect('role')->with('message', 'Role berhasil diupdate!');
     }

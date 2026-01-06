@@ -2,30 +2,51 @@
 
 @section('content')
 
-<!-- Page Heading -->
-<a href="{{ url('role') }}" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Back</a>
+    <!-- Header -->
+    <div class="mb-8 flex items-center justify-between">
+        <div>
+            <a href="{{ url('role') }}"
+                class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 transition mb-2">
+                <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18">
+                    </path>
+                </svg>
+                Back to Roles
+            </a>
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Add New Role</h1>
+            <p class="text-slate-500 mt-1">Tentukan posisi atau jabatan baru dalam struktur organisasi.</p>
+        </div>
+    </div>
 
-<h1 class="h3 m-4 text-gray-800">Add new role</h1>
+    <!-- Form Card -->
+    <div class="max-w-lg bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="p-8">
+            <form action="{{ url('role') }}" method="POST" class="space-y-6">
+                @csrf
 
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-body">
-        <form action="{{ url('role') }}" method="POST">
-            @csrf
-            <div class="form-group row justify-content-center">
-                <div class="col-md-5 text-center">
-                    <label for="">Name</label>
-                    <input type="text" placeholder="New role .." class="form-control" name="role_name" value="{{ old('role_name') }}">
-                    @error('role_name')
-                    <small class="text-danger">{{ $message }}</small>
+                <div class="space-y-2">
+                    <label class="text-sm font-semibold text-gray-700">Role Name</label>
+                    <input type="text" name="name" value="{{ old('name') }}" placeholder="e.g. Marketing Lead"
+                        class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition">
+                    @error('name')
+                        <p class="text-xs text-red-500 mt-1 font-medium">{{ $message }}</p>
                     @enderror
                 </div>
-                <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-success mt-2">Submit</button>
+
+                <!-- Action Buttons -->
+                <div class="pt-6 flex items-center justify-end space-x-3 border-t border-gray-100">
+                    <button type="reset"
+                        class="px-6 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-gray-50 transition">
+                        Reset
+                    </button>
+                    <button type="submit"
+                        class="px-8 py-2.5 bg-indigo-600 rounded-xl text-sm font-bold text-white hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-500/20 transition shadow-lg shadow-indigo-100">
+                        Create Role
+                    </button>
                 </div>
-            </div>
-        </form>
+
+            </form>
+        </div>
     </div>
-</div>
 
 @endsection

@@ -2,61 +2,122 @@
 
 @section('content')
 
-<!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Management users</h1>
-<p class="mb-4">Disini fitur untuk menambahkan, menyunting, dan menghapus data pengguna.</p>
+    <!-- Page Heading -->
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 space-y-4 md:space-y-0">
+        <div>
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Management Users</h1>
+            <p class="text-slate-500 mt-1">Kelola data pengguna, hak akses, dan profil karyawan.</p>
+        </div>
+        <a href="{{ url('user/create') }}"
+            class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
+            <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+            </svg>
+            Add New User
+        </a>
+    </div>
 
-<!-- DataTales Example -->
-<div class="card shadow mb-4">
-    <div class="card-body">
-        @if(session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+    <!-- Notification -->
+    @if(session()->has('message'))
+        <div class="mb-6 flex items-center p-4 text-sm text-emerald-800 border border-emerald-200 rounded-xl bg-emerald-50"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Success</span>
+            <div class="font-medium">
+                {{ session('message') }}
+            </div>
         </div>
-        @endif
-        <div class="text-right">
-            <a href="{{ url('user/create') }}" class="btn btn-success m-2"><i class="fas fa-plus mr-1"></i> Add user</a>
-        </div>
-        <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead class="bg-light">
+    @endif
+
+    <!-- Users Table Card -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50/50">
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>address</th>
-                        <th>Position</th>
-                        <th>Action</th>
+                        <th scope="col"
+                            class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Email
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Phone
+                        </th>
+                        <th scope="col"
+                            class="px-6 py-4 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                            Position</th>
+                        <th scope="col"
+                            class="px-6 py-4 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Action
+                        </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="bg-white divide-y divide-gray-200">
                     @foreach($users as $user)
-                    <tr>
-                        <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->phone }}</td>
-                        <td>{{ $user->address }}</td>
-                        <td>{{ $user->role->role_name }}</td>
-                        <td>
-                            <a href="{{ url('user/' . $user->id . '/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>
-                            <form action="{{ url('user/' . $user->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" onclick="return confirm('Apakah anda yakin akan dihapus?')" class="bg-danger text-white" style="border: 0px"><i class="fas fa-trash"></i></button>
-                            </form>
-                        </td>
-                    </tr>
+                        <tr class="hover:bg-gray-50/50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div
+                                        class="h-10 w-10 flex-shrink-0 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold border-2 border-white">
+                                        {{ substr(strtoupper($user->name), 0, 1) }}
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-bold text-gray-900 uppercase">{{ $user->name }}</div>
+                                        <div class="text-xs text-gray-500">{{ $user->address ?? 'No address' }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                {{ $user->email }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                                {{ $user->phone ?? '-' }}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span
+                                    class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $user->role_id == 1 ? 'bg-indigo-100 text-indigo-800' : 'bg-emerald-100 text-emerald-800' }}">
+                                    {{ $user->role->name ?? $user->role->role_name ?? 'Guest' }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium space-x-2">
+                                <a href="{{ url('user/' . $user->id . '/edit') }}"
+                                    class="inline-flex items-center px-3 py-1.5 bg-white border border-gray-300 rounded-lg text-xs font-semibold text-gray-700 hover:bg-gray-50 transition shadow-sm">
+                                    <svg class="h-4 w-4 mr-1 text-gray-400" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                    </svg>
+                                    Edit
+                                </a>
+                                <form action="{{ url('user/' . $user->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" onclick="return confirm('Apakah anda yakin akan dihapus?')"
+                                        class="inline-flex items-center px-3 py-1.5 bg-red-50 border border-red-200 rounded-lg text-xs font-semibold text-red-600 hover:bg-red-100 transition shadow-sm">
+                                        <svg class="h-4 w-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
+        </div>
+
+        <!-- Table Footer / Pagination -->
+        <div class="bg-gray-50 px-6 py-4 border-t border-gray-100">
+            <div class="flex justify-center">
                 {{ $users->links() }}
             </div>
         </div>
     </div>
-</div>
 
 @endsection

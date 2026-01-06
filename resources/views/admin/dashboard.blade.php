@@ -2,301 +2,273 @@
 
 @section('content')
 
-<div class="container-fluid">
-
     <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 space-y-4 md:space-y-0">
+        <div>
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Dashboard Overview</h1>
+            <p class="text-slate-500 mt-1">Selamat datang di panel kendali utama PresensiApp.</p>
+        </div>
+        <div class="flex space-x-3">
+            <button
+                class="inline-flex items-center px-4 py-2 bg-white border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
+                <svg class="h-4 w-4 mr-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Generate Report
+            </button>
+            <button
+                class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition">
+                <svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                </svg>
+                Create Task
+            </button>
+        </div>
     </div>
 
-    <!-- Content Row -->
-    <div class="row">
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-primary shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                User</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $users }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-users fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
+        <!-- Users Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center transition hover:shadow-md">
+            <div class="p-4 bg-blue-50 rounded-xl text-blue-600">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+            </div>
+            <div class="ml-5">
+                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Users</p>
+                <h3 class="text-3xl font-bold text-gray-900 mt-1">{{ $users }}</h3>
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Concession</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $concessions }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-edit fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
+        <!-- Concessions Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center transition hover:shadow-md">
+            <div class="p-4 bg-amber-50 rounded-xl text-amber-600">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                </svg>
             </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Attendance</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $attendances }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-check fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-warning shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Role</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $roles }}</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-user-tie fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
+            <div class="ml-5">
+                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Concessions</p>
+                <h3 class="text-3xl font-bold text-gray-900 mt-1">{{ $concessions }}</h3>
             </div>
         </div>
 
+        <!-- Attendance Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center transition hover:shadow-md">
+            <div class="p-4 bg-emerald-50 rounded-xl text-emerald-600">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="ml-5">
+                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Attendances</p>
+                <h3 class="text-3xl font-bold text-gray-900 mt-1">{{ $attendances }}</h3>
+            </div>
+        </div>
 
+        <!-- Roles Card -->
+        <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex items-center transition hover:shadow-md">
+            <div class="p-4 bg-indigo-50 rounded-xl text-indigo-600">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09m8.19.828c.196.12.398.228.605.322m.967-1.127c.322.067.643.125.967.173m-10.14-1.24a5.5 5.5 0 1110.14 0M12 7v4" />
+                </svg>
+            </div>
+            <div class="ml-5">
+                <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Total Roles</p>
+                <h3 class="text-3xl font-bold text-gray-900 mt-1">{{ $roles }}</h3>
+            </div>
+        </div>
     </div>
 
-    <!-- Content Row -->
+    <!-- Main Content Row -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
 
-    <div class="row">
-
-        <!-- Area Chart -->
-        <div class="col-xl-8 col-lg-7">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+        <!-- Attendance Trend Chart -->
+        <div class="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
+                <h4 class="font-bold text-slate-800">Attendance Trends</h4>
+                <div class="flex space-x-1">
+                    <span class="w-3 h-3 bg-indigo-500 rounded-full"></span>
+                    <span class="w-3 h-3 bg-indigo-200 rounded-full"></span>
                 </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
-                </div>
+            </div>
+            <div class="p-6">
+                <canvas id="attendanceTrendChart" height="280"></canvas>
             </div>
         </div>
 
-        <!-- Pie Chart -->
-        <div class="col-xl-4 col-lg-5">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                    <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Dropdown Header:</div>
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </div>
+        <!-- Distribution Pie Chart -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-5 border-b border-gray-100 flex items-center justify-between">
+                <h4 class="font-bold text-slate-800">User Roles</h4>
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <div class="p-6 flex flex-col items-center">
+                <div class="w-full max-w-[220px]">
+                    <canvas id="roleDistributionChart"></canvas>
                 </div>
-                <!-- Card Body -->
-                <div class="card-body">
-                    <div class="chart-pie pt-4 pb-2">
-                        <canvas id="myPieChart"></canvas>
+                <div class="mt-8 w-full space-y-3">
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center text-gray-500"><span
+                                class="w-3 h-3 bg-indigo-500 rounded-full mr-2"></span> Admin</span>
+                        <span class="font-bold text-gray-900">10%</span>
                     </div>
-                    <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Direct
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Social
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Referral
-                        </span>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center text-gray-500"><span
+                                class="w-3 h-3 bg-emerald-500 rounded-full mr-2"></span> Staff</span>
+                        <span class="font-bold text-gray-900">75%</span>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="flex items-center text-gray-500"><span
+                                class="w-3 h-3 bg-amber-400 rounded-full mr-2"></span> Guest</span>
+                        <span class="font-bold text-gray-900">15%</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Content Row -->
-    <div class="row">
+    <!-- Secondary Content Row -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-        <!-- Content Column -->
-        <div class="col-lg-6 mb-4">
-
-            <!-- Project Card Example -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Projects</h6>
-                </div>
-                <div class="card-body">
-                    <h4 class="small font-weight-bold">Server Migration <span class="float-right">20%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Sales Tracking <span class="float-right">40%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Customer Database <span class="float-right">60%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Payout Details <span class="float-right">80%</span></h4>
-                    <div class="progress mb-4">
-                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <h4 class="small font-weight-bold">Account Setup <span class="float-right">Complete!</span></h4>
-                    <div class="progress">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+        <!-- Recent Activity -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="px-6 py-5 border-b border-gray-100">
+                <h4 class="font-bold text-slate-800">Recent Attendance</h4>
+            </div>
+            <div class="p-0">
+                <ul class="divide-y divide-gray-100">
+                    <li class="px-6 py-4 flex items-center hover:bg-gray-50 transition">
+                        <div
+                            class="h-10 w-10 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 font-bold shrink-0">
+                            JD</div>
+                        <div class="ml-4">
+                            <p class="text-sm font-semibold text-gray-900">John Doe <span
+                                    class="text-xs font-normal text-gray-400">marked as</span> <span
+                                    class="text-emerald-600 font-bold">Present</span></p>
+                            <p class="text-xs text-gray-500">2 minutes ago • Office HQ</p>
+                        </div>
+                    </li>
+                    <li class="px-6 py-4 flex items-center hover:bg-gray-50 transition">
+                        <div
+                            class="h-10 w-10 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 font-bold shrink-0">
+                            AS</div>
+                        <div class="ml-4">
+                            <p class="text-sm font-semibold text-gray-900">Alice Smith <span
+                                    class="text-xs font-normal text-gray-400">requested</span> <span
+                                    class="text-amber-600 font-bold">Concession</span></p>
+                            <p class="text-xs text-gray-500">15 minutes ago • Mobile App</p>
+                        </div>
+                    </li>
+                    <li class="px-6 py-4 flex items-center hover:bg-gray-50 transition">
+                        <div
+                            class="h-10 w-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 font-bold shrink-0">
+                            BK</div>
+                        <div class="ml-4">
+                            <p class="text-sm font-semibold text-gray-900">Bob Knight <span
+                                    class="text-xs font-normal text-gray-400">marked as</span> <span
+                                    class="text-emerald-600 font-bold">Present</span></p>
+                            <p class="text-xs text-gray-500">1 hour ago • QR Scan</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="px-6 py-4 bg-gray-50 text-center">
+                    <a href="{{ url('attendance') }}"
+                        class="text-sm font-bold text-indigo-600 hover:text-indigo-800 transition">View All Activity
+                        &rarr;</a>
                 </div>
             </div>
-
-            <!-- Color System -->
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-primary text-white shadow">
-                        <div class="card-body">
-                            Primary
-                            <div class="text-white-50 small">#4e73df</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-success text-white shadow">
-                        <div class="card-body">
-                            Success
-                            <div class="text-white-50 small">#1cc88a</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-info text-white shadow">
-                        <div class="card-body">
-                            Info
-                            <div class="text-white-50 small">#36b9cc</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-warning text-white shadow">
-                        <div class="card-body">
-                            Warning
-                            <div class="text-white-50 small">#f6c23e</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-danger text-white shadow">
-                        <div class="card-body">
-                            Danger
-                            <div class="text-white-50 small">#e74a3b</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-secondary text-white shadow">
-                        <div class="card-body">
-                            Secondary
-                            <div class="text-white-50 small">#858796</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-light text-black shadow">
-                        <div class="card-body">
-                            Light
-                            <div class="text-black-50 small">#f8f9fc</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card bg-dark text-white shadow">
-                        <div class="card-body">
-                            Dark
-                            <div class="text-white-50 small">#5a5c69</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <div class="col-lg-6 mb-4">
-
-            <!-- Illustrations -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
-                </div>
-                <div class="card-body">
-                    <div class="text-center">
-                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;" src="img/undraw_posting_photo.svg" alt="...">
-                    </div>
-                    <p>Add some quality, svg illustrations to your project courtesy of <a target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                        constantly updated collection of beautiful svg images that you can use
-                        completely free and without attribution!</p>
-                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                        unDraw &rarr;</a>
-                </div>
+        <!-- System Status -->
+        <div
+            class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center justify-center text-center">
+            <div class="p-5 bg-indigo-600 rounded-3xl shadow-lg shadow-indigo-200 mb-6">
+                <svg class="h-12 w-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
             </div>
-
-            <!-- Approach -->
-            <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Development Approach</h6>
-                </div>
-                <div class="card-body">
-                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                        custom components and custom utility classes.</p>
-                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                        Bootstrap framework, especially the utility classes.</p>
-                </div>
+            <h3 class="text-xl font-bold text-gray-900">System High Perfomance</h3>
+            <p class="text-gray-500 mt-2 max-w-xs">Aplikasi Anda berjalan dengan optimal. Semua sensor dan integrasi QR
+                aktif.</p>
+            <div class="mt-8 flex space-x-2">
+                <span class="flex h-3 w-3 relative">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                </span>
+                <span class="text-xs font-bold text-emerald-600 uppercase tracking-widest">Active Server</span>
             </div>
-
         </div>
+
     </div>
-
-</div>
 
 @endsection
+
+@push('scripts')
+    <script>
+        // Attendance Trend Chart
+        const ctxTrend = document.getElementById('attendanceTrendChart').getContext('2d');
+        new Chart(ctxTrend, {
+            type: 'line',
+            data: {
+                labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+                datasets: [{
+                    label: 'Presence',
+                    data: [65, 59, 80, 81, 56, 40, 30],
+                    fill: true,
+                    backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    borderColor: 'rgb(99, 102, 241)',
+                    tension: 0.4,
+                    pointRadius: 4,
+                    pointBackgroundColor: '#fff',
+                    pointBorderColor: 'rgb(99, 102, 241)',
+                    pointBorderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, border: { display: false } },
+                    x: { grid: { display: false }, border: { display: false } }
+                }
+            }
+        });
+
+        // Role Distribution Chart
+        const ctxRole = document.getElementById('roleDistributionChart').getContext('2d');
+        new Chart(ctxRole, {
+            type: 'doughnut',
+            data: {
+                labels: ['Admin', 'Staff', 'Guest'],
+                datasets: [{
+                    data: [10, 75, 15],
+                    backgroundColor: ['#6366f1', '#10b981', '#fbbf24'],
+                    borderWidth: 0,
+                    cutout: '75%'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+    </script>
+@endpush
